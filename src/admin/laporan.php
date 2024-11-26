@@ -70,16 +70,21 @@
             </div>
         </aside>
         <section class="mr-4 bg-[#FFFFFF] rounded-lg p-5">
-            <h1 class="text-sm font-semibold">Laporan Penjualan</h1>
-            <table class="border mr-4 w-full mt-4">
-                <tr class="border text-left bg-blue-900 text-white">
-                    <th class="p-2">No</th>
-                    <th class="p-2">Nama Produk</th>
-                    <th class="p-2">Jumlah Terjual</th>
-                    <th class="p-2">Harga Satuan</th>
-                    <th class="p-2">Total Harga</th>
+        <h1 class="text-sm font-semibold">Laporan Penjualan</h1>
+        <table class="border mr-4 w-full mt-4">
+            <tr class="border text-left bg-blue-900 text-white">
+                <th class="p-2">No</th>
+                <th class="p-2">Nama Produk</th>
+                <th class="p-2">Jumlah Terjual</th>
+                <th class="p-2">Harga Satuan</th>
+                <th class="p-2">Total Harga</th>
+            </tr>
+            <?php if(empty($penjualan)): ?>
+                <tr>
+                    <td colspan="5" class="p-2 text-center">Tidak ada data penjualan.</td>
                 </tr>
-                <?php  $no = 1 ?>
+            <?php else: ?>
+                <?php $no = 1; ?>
                 <?php foreach($penjualan as $pjl): ?>
                     <tr class="border">
                         <td class="p-2"><?= $no; ?></td>
@@ -88,10 +93,17 @@
                         <td class="p-2"><?= number_format($pjl["h"], 0, ',', '.') ; ?></td>
                         <td class="p-2"><?= number_format($pjl["th"], 0, ',', '.') ; ?></td>
                     </tr>
-                <?php $no++ ?>
+                    <?php $no++; ?>
                 <?php endforeach; ?>
-            </table>
-        </section>
+                <tr class="border font-semibold">
+                    <td colspan="2"></td>
+                    <td class="p-2">Total: <?= number_format(array_sum(array_column($penjualan, 'jp')), 0, ',', '.') ; ?></td>
+                    <td colspan="1"></td>
+                    <td class="p-2">Total: <?= number_format(array_sum(array_column($penjualan, 'th')), 0, ',', '.') ; ?></td>
+                </tr>
+            <?php endif; ?>
+        </table>
+</section>
     </main>
 </body>
 </html>

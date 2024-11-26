@@ -28,4 +28,72 @@
         $query = "SELECT * FROM produk WHERE id_kategori = '$kategori'";
         return query($query);
     }
+
+    function upload() {
+        $fileName = $_FILES["gambar"]["name"];
+        $fileTmpName = $_FILES["gambar"]["tmp_name"];
+        $fileSize = $_FILES["gambar"]["size"];
+        $error = $_FILES["gambar"]["error"];
+
+        if($error === 4) {
+            echo "
+                <script>
+                    alert('Select The Image First');
+                </script>
+            ";
+        }
+
+        $allowedExtension = ['jpg', 'jpeg', 'png'];
+        $fileExtension = explode('.', $fileName);
+        $fileExtension = strtolower(end($fileExtension));
+
+        if(!in_array($fileExtension, $allowedExtension)) {
+            echo "
+                <script>
+                    alert('What You Uploaded is Not an Image');
+                </script>
+            ";
+            return false;
+        }
+
+        if($fileSize >  3145728) {
+            echo "<script>
+                    alert('Image Size is too Large');
+                </script>";
+            return false;
+        }
+
+        $newName = uniqid();
+        $newName .= '.' . $fileExtension;
+        move_uploaded_file($fileTmpName, "../assets/images/$newName");
+        return $newName;
+    }
+    
+
+    function tambah_produk($data) {
+        global $conn;
+
+        $nama = $data["nama"];
+        $keterangan = $data["keterangan"];
+        $harga = $data["harga"];
+        $kategori = $data["kategori"];
+
+        $image = upload();
+        if (!$image) {
+            return false;
+        }
+
+        $query = "INSERT INTO produk VALUES ('', '$nama', '$keterangan', '$harga', '$kategori' ,'$image', 'available')";
+        mysqli_query($conn, $query);
+        return mysqli_affected_rows($conn);
+    }
+
+    function tambah_kategori($data) {
+        global $conn;
+
+        $nama = $data["nama"];
+        $query = "INSERT INTO kategori VALUES ('', '$nama')";
+        mysqli_query($conn, $query);
+        return mysqli_affected_rows($conn);
+    }
 ?>
