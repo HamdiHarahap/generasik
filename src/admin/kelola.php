@@ -86,7 +86,11 @@
                         <td class="p-2"><?= $pdk["keterangan_produk"]; ?></td>
                         <td class="p-2"><?= $pdk["nama_kategori"]; ?></td>
                         <td class="p-2"><img src="../assets/images/<?= $pdk["gambar"]; ?>" alt="" class="w-[5rem] rounded-lg"></td>
-                        <td class="p-2"><?= $pdk["is_available"] ?></td>
+                        <?php if($pdk["is_available"] == 'available'): ?>
+                            <td class="p-2 text-green-600"><?= $pdk["is_available"] ?></td>
+                        <?php else: ?>
+                            <td class="p-2 text-red-600"><?= $pdk["is_available"] ?></td>
+                        <?php endif; ?>
                         <td class="p-2">
                             <div class="flex gap-1">
                                 <a href="./edit.php?id_produk=<?= $pdk["id_produk"]; ?>" class="flex items-center justify-center bg-yellow-300 rounded-lg cursor-pointer p-1 w-fit">

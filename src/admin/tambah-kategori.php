@@ -1,7 +1,19 @@
 <?php 
     require '../functions/functions.php';
 
-   $kategori = query("SELECT * FROM kategori");
+    $kategori = query("SELECT * FROM kategori");
+
+    if(isset($_POST["submit"])) {
+        if(tambah_kategori($_POST) > 0) {
+            echo "
+                <script>
+                    alert('Kategori Berhasil Ditambahkan');
+                    window.location.href = './kelola.php';
+                </script>
+            ";  
+        }
+    }
+
 ?>
 
 <!DOCTYPE html>
