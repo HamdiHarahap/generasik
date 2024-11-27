@@ -1,21 +1,39 @@
 <?php 
-require '../functions/functions.php';
+    require '../functions/functions.php';
 
-$kategori = query("SELECT * FROM kategori");
+    $kategori = query("SELECT * FROM kategori");
 
-$id_produk = $_GET["id_produk"];
-$produk = query("SELECT * FROM produk WHERE id_produk = '$id_produk'")[0];
-
-if(isset($_POST["submit"])) {
-    if(edit_produk($_POST) > 0) {
-        echo "
-            <script>
-                alert('Produk Berhasil Diedit');
-                window.location.href = './kelola.php';
-            </script>
-        ";   
+    if(isset($_GET["id_produk"])) {
+        $id_produk = $_GET["id_produk"];
+        $produk = query("SELECT * FROM produk WHERE id_produk = '$id_produk'")[0];
     }
-}
+
+    if(isset($_GET["id_kategori"])) {
+        $id_kategori = $_GET["id_kategori"];
+        $kategori = query("SELECT * FROM kategori WHERE id_kategori = '$id_kategori'")[0];
+    }
+
+    if(isset($_POST["edit-produk"])) {
+        if(edit_produk($_POST) > 0) {
+            echo "
+                <script>
+                    alert('Produk Berhasil Diedit');
+                    window.location.href = './kelola.php';
+                </script>
+            ";   
+        }
+    }
+
+    if(isset($_POST["edit-kategori"])) {
+        if(edit_kategori($_POST) > 0) {
+            echo "
+                <script>
+                    alert('Kategori Berhasil Diedit');
+                    window.location.href = './kelola.php';
+                </script>
+            ";   
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +41,8 @@ if(isset($_POST["submit"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Produk</title>
+    <title>Generasik | Edit Produk</title>
+    <link rel="icon" href="../assets/images/logo-generasik.png">
     <link rel="stylesheet" href="../output.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -75,43 +94,60 @@ if(isset($_POST["submit"])) {
                 <h1 class="text-2xl">Kelola</h1>
             </div>
         </aside>
-        <section class="mr-4 bg-[#FFFFFF] rounded-lg p-5">
-            <h1 class="text-sm font-semibold mb-6">Edit Produk</h1>
-            <form action="" method="POST" class="flex flex-col gap-4 items-start" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="<?= $produk["id_produk"]; ?>">
-                <input type="hidden" name="gambarLama" value="<?= $produk["gambar"] ?>">
-                <ul class="flex flex-col gap-6 w-full">
-                    <li class="flex flex-col">
-                        <label for="nama" class="mb-1">Nama Produk :</label>
-                        <input type="text" name="nama" id="nama" value="<?= $produk["nama_produk"]; ?>" class="px-3 py-2 border-b-2 border-black outline-none w-[30rem]" required>
-                    </li>
-                    <li class="flex flex-col">
-                        <label for="keterangan" class="mb-1">Keterangan Produk :</label>
-                        <input type="text" name="keterangan" id="keterangan" value="<?= $produk["keterangan_produk"]; ?>" class="px-3 py-2 border-b-2 border-black outline-none w-[30rem]" required>
-                    </li>
-                    <li class="flex flex-col">
-                        <label for="harga" class="mb-1">Harga Produk :</label>
-                        <input type="text" name="harga" id="harga" value="<?= $produk["harga_produk"]; ?>" class="px-3 py-2 border-b-2 border-black outline-none w-[30rem]" required>
-                    </li>
-                    <li class="flex flex-col">
-                        <label for="kategori" class="mb-1">Kategori :</label>
-                        <select name="kategori" id="kategori" class="border-b-2 border-black px-3 py-2 outline-none w-[30rem]" required>
-                            <?php foreach($kategori as $ktg): ?>
-                                <option value="<?= $ktg["id_kategori"]; ?>" <?= $ktg["id_kategori"] == $produk["id_kategori"] ? 'selected' : ''; ?>><?= $ktg["nama_kategori"]; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </li>
-                    <li class="flex flex-col">
-                        <label for="gambar" class="mb-1">Gambar :</label>
-                        <div class="flex flex-col">
-                            <input type="file" name="gambar" id="gambar" class="mb-2" onchange="previewImage()">
-                            <img id="preview" src="../assets/images/<?= $produk["gambar"]; ?>" alt="Image preview" class="w-40 mt-2">
-                        </div>
-                    </li>
-                </ul>
-                <button type="submit" name="submit" class="bg-blue-900 rounded-lg px-4 py-2 text-white">Submit</button>
-            </form>
-        </section>
+        <?php if(isset($id_produk)): ?>
+            <section class="mr-4 bg-[#FFFFFF] rounded-lg p-5">
+                <h1 class="text-sm font-semibold mb-6">Edit Produk</h1>
+                <form action="" method="POST" class="flex flex-col gap-4 items-start" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="<?= $produk["id_produk"]; ?>">
+                    <input type="hidden" name="gambarLama" value="<?= $produk["gambar"] ?>">
+                    <ul class="flex flex-col gap-6 w-full">
+                        <li class="flex flex-col">
+                            <label for="nama" class="mb-1">Nama Produk :</label>
+                            <input type="text" name="nama" id="nama" value="<?= $produk["nama_produk"]; ?>" class="px-3 py-2 border-b-2 border-black outline-none w-[30rem]" required>
+                        </li>
+                        <li class="flex flex-col">
+                            <label for="keterangan" class="mb-1">Keterangan Produk :</label>
+                            <input type="text" name="keterangan" id="keterangan" value="<?= $produk["keterangan_produk"]; ?>" class="px-3 py-2 border-b-2 border-black outline-none w-[30rem]" required>
+                        </li>
+                        <li class="flex flex-col">
+                            <label for="harga" class="mb-1">Harga Produk :</label>
+                            <input type="text" name="harga" id="harga" value="<?= $produk["harga_produk"]; ?>" class="px-3 py-2 border-b-2 border-black outline-none w-[30rem]" required>
+                        </li>
+                        <li class="flex flex-col">
+                            <label for="kategori" class="mb-1">Kategori :</label>
+                            <select name="kategori" id="kategori" class="border-b-2 border-black px-3 py-2 outline-none w-[30rem]" required>
+                                <?php foreach($kategori as $ktg): ?>
+                                    <option value="<?= $ktg["id_kategori"]; ?>" <?= $ktg["id_kategori"] == $produk["id_kategori"] ? 'selected' : ''; ?>><?= $ktg["nama_kategori"]; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </li>
+                        <li class="flex flex-col">
+                            <label for="gambar" class="mb-1">Gambar :</label>
+                            <div class="flex flex-col">
+                                <input type="file" name="gambar" id="gambar" class="mb-2" onchange="previewImage()">
+                                <img id="preview" src="../assets/images/<?= $produk["gambar"]; ?>" alt="Image preview" class="w-40 mt-2">
+                            </div>
+                        </li>
+                    </ul>
+                    <button type="submit" name="edit-produk" class="bg-blue-900 rounded-lg px-4 py-2 text-white">Submit</button>
+                </form>
+            </section>
+        <?php endif; ?>
+        <?php if(isset($id_kategori)): ?>
+            <section class="mr-4 bg-[#FFFFFF] rounded-lg p-5">
+                <h1 class="text-sm font-semibold mb-6">Tambah Kategori</h1>
+                <form action="" method="POST" class="flex flex-col gap-4 items-start" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="<?= $kategori["id_kategori"]; ?>">
+                    <ul class="flex flex-col gap-4">
+                        <li class="flex flex-col">
+                            <label for="nama">Nama Kategori : </label>
+                            <input type="text" name="nama" id="nama" value="<?= $kategori["nama_kategori"]; ?>" class="px-3 py-2 border-b-2 border-black outline-none w-[30rem]" >
+                        </li>
+                    </ul>
+                    <button type="submit" name="edit-kategori" class="bg-blue-900 rounded-lg px-4 py-2 text-white">Submit</button>
+                </form>
+            </section>
+        <?php endif; ?>
     </main>
 
     <script>

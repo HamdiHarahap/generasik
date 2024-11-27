@@ -127,4 +127,16 @@
         mysqli_query($conn, $query);
         return mysqli_affected_rows($conn);
     }
+
+    function edit_kategori($data) {
+        global $conn;
+
+        $id = $data["id"];
+        $nama = $data["nama"];
+
+        $query = "UPDATE kategori SET nama_kategori = '$nama' WHERE id_kategori = '$id'";
+
+        mysqli_query($conn, $query);
+        return mysqli_affected_rows($conn);
+    }
 ?>
