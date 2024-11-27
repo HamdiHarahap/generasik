@@ -135,7 +135,7 @@
         <?php endif; ?>
         <?php if(isset($id_kategori)): ?>
             <section class="mr-4 bg-[#FFFFFF] rounded-lg p-5">
-                <h1 class="text-sm font-semibold mb-6">Tambah Kategori</h1>
+                <h1 class="text-sm font-semibold mb-6">Edit Kategori</h1>
                 <form action="" method="POST" class="flex flex-col gap-4 items-start" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="<?= $kategori["id_kategori"]; ?>">
                     <ul class="flex flex-col gap-4">

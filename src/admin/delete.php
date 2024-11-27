@@ -5,8 +5,14 @@
         global $conn;
         $id_produk = $_GET["id_produk"];
         $query = "DELETE FROM produk WHERE id_produk = '$id_produk'";
+        $produk = query("SELECT * FROM produk WHERE id_produk = '$id_produk'")[0];
+        $image = $produk["gambar"];
+        if (file_exists("img/$image")) {
+            unlink("../assets/images/$image");
+        }
         mysqli_query($conn, $query);
     }
+    
 
     if($_GET["id_kategori"]) {
         global $conn;
