@@ -1,18 +1,21 @@
 <?php 
-    require '../functions/functions.php';
+require '../functions/functions.php';
 
-    $kategori = query("SELECT * FROM kategori");
+$kategori = query("SELECT * FROM kategori");
 
-    if(isset($_POST["submit"])) {
-        if(tambah_produk($_POST) > 0) {
-            echo "
-                <script>
-                    alert('Produk Berhasil Ditambahkan');
-                    window.location.href = './kelola.php';
-                </script>
-            ";   
-        }
+$id_produk = $_GET["id_produk"];
+$produk = query("SELECT * FROM produk WHERE id_produk = '$id_produk'")[0];
+
+if(isset($_POST["submit"])) {
+    if(edit_produk($_POST) > 0) {
+        echo "
+            <script>
+                alert('Produk Berhasil Diedit');
+                window.location.href = './kelola.php';
+            </script>
+        ";   
     }
+}
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +23,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit Produk</title>
     <link rel="stylesheet" href="../output.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -73,34 +76,36 @@
             </div>
         </aside>
         <section class="mr-4 bg-[#FFFFFF] rounded-lg p-5">
-            <h1 class="text-sm font-semibold mb-6">Tambah Produk</h1>
+            <h1 class="text-sm font-semibold mb-6">Edit Produk</h1>
             <form action="" method="POST" class="flex flex-col gap-4 items-start" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<?= $produk["id_produk"]; ?>">
+                <input type="hidden" name="gambarLama" value="<?= $produk["gambar"] ?>">
                 <ul class="flex flex-col gap-6 w-full">
                     <li class="flex flex-col">
                         <label for="nama" class="mb-1">Nama Produk :</label>
-                        <input type="text" name="nama" id="nama" class="px-3 py-2 border-b-2 border-black outline-none w-[30rem]" required>
+                        <input type="text" name="nama" id="nama" value="<?= $produk["nama_produk"]; ?>" class="px-3 py-2 border-b-2 border-black outline-none w-[30rem]" required>
                     </li>
                     <li class="flex flex-col">
                         <label for="keterangan" class="mb-1">Keterangan Produk :</label>
-                        <input type="text" name="keterangan" id="keterangan" class="px-3 py-2 border-b-2 border-black outline-none w-[30rem]" required>
+                        <input type="text" name="keterangan" id="keterangan" value="<?= $produk["keterangan_produk"]; ?>" class="px-3 py-2 border-b-2 border-black outline-none w-[30rem]" required>
                     </li>
                     <li class="flex flex-col">
                         <label for="harga" class="mb-1">Harga Produk :</label>
-                        <input type="text" name="harga" id="harga" class="px-3 py-2 border-b-2 border-black outline-none w-[30rem]" required>
+                        <input type="text" name="harga" id="harga" value="<?= $produk["harga_produk"]; ?>" class="px-3 py-2 border-b-2 border-black outline-none w-[30rem]" required>
                     </li>
                     <li class="flex flex-col">
                         <label for="kategori" class="mb-1">Kategori :</label>
                         <select name="kategori" id="kategori" class="border-b-2 border-black px-3 py-2 outline-none w-[30rem]" required>
                             <?php foreach($kategori as $ktg): ?>
-                                <option value="<?= $ktg["id_kategori"]; ?>"><?= $ktg["nama_kategori"]; ?></option>
+                                <option value="<?= $ktg["id_kategori"]; ?>" <?= $ktg["id_kategori"] == $produk["id_kategori"] ? 'selected' : ''; ?>><?= $ktg["nama_kategori"]; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </li>
                     <li class="flex flex-col">
                         <label for="gambar" class="mb-1">Gambar :</label>
                         <div class="flex flex-col">
-                            <input type="file" name="gambar" id="gambar" class="mb-2" onchange="previewImage()" required>
-                            <img id="preview" src="" alt="Image preview" class="w-40 hidden">
+                            <input type="file" name="gambar" id="gambar" class="mb-2" onchange="previewImage()">
+                            <img id="preview" src="../assets/images/<?= $produk["gambar"]; ?>" alt="Image preview" class="w-40 mt-2">
                         </div>
                     </li>
                 </ul>
@@ -122,9 +127,9 @@
             if (file) {
                 reader.readAsDataURL(file);
                 preview.style.display = 'flex';
-                preview.classList.remove = 'hidden'
+                preview.classList.remove('hidden');
             } else {
-                preview.src = '';
+                preview.src = '../assets/images/<?= $produk["gambar"]; ?>';
             }
         }
     </script>

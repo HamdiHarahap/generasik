@@ -96,4 +96,35 @@
         mysqli_query($conn, $query);
         return mysqli_affected_rows($conn);
     }
+
+    function edit_produk($data) {
+        global $conn;
+
+        $id = $data["id"];
+        $nama = $data["nama"];
+        $keterangan = $data["keterangan"];
+        $harga = $data["harga"];
+        $kategori = $data["kategori"];
+        $gambarLama = $data["gambarLama"];
+
+        if ($_FILES['gambar']['error'] === 4) {
+            $image = $gambarLama;
+        } else {
+            $image = upload();
+            if (!$image) {
+                return false;
+            }
+        }
+
+        $query = "UPDATE produk SET
+                    nama_produk = '$nama',
+                    keterangan_produk = '$keterangan',
+                    harga_produk = '$harga',
+                    id_kategori = '$kategori',
+                    gambar = '$image'
+                    WHERE id_produk = '$id'";
+
+        mysqli_query($conn, $query);
+        return mysqli_affected_rows($conn);
+    }
 ?>

@@ -37,7 +37,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./kelola.php" class="bg-[#F2F9FE] text-black flex gap-2 px-10 py-3">
+                    <a href="./kelola.php" class="bg-[#F2F9FE] text-black flex gap-2 px-10 py-3 rounded-s-lg">
                         <img src="../assets/icon/customer-dark.svg" alt="logo" class="w-6">
                         Pelanggan
                     </a>

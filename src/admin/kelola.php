@@ -6,7 +6,7 @@
     }   
     require '../functions/functions.php';
     
-    $product = query("SELECT p.id_produk, p.nama_produk, p.keterangan_produk, k.nama_kategori, p.harga_produk, p.gambar, p.is_available FROM produk AS p JOIN kategori AS k ON p.id_kategori=k.id_kategori");
+    $product = query("SELECT p.id_produk, p.nama_produk, p.keterangan_produk, k.nama_kategori, p.harga_produk, p.gambar, p.is_available FROM produk AS p JOIN kategori AS k ON p.id_kategori=k.id_kategori ORDER BY p.id_kategori ASC");
     $kategori = query("SELECT * FROM kategori");
 ?>
 
@@ -29,7 +29,7 @@
                         Dashboard
                     </a>
                 </li>
-                <li class="bg-[#F2F9FE] px-10 py-3 text-black">
+                <li class="bg-[#F2F9FE] px-10 py-3 text-black rounded-s-lg">
                     <a href="" class="flex gap-2">
                         <img src="../assets/icon/manage-dark.svg" alt="logo" class="w-6">
                         Kelola
@@ -96,7 +96,7 @@
                                 <a href="./edit.php?id_produk=<?= $pdk["id_produk"]; ?>" class="flex items-center justify-center bg-yellow-300 rounded-lg cursor-pointer p-1 w-fit">
                                     <img src="../assets/icon/edit.svg" alt="logo" class="w-6">
                                 </a>
-                                <a href="./delete.php?id_produk=<?= $pdk["id_produk"]; ?>" onclick="return confirm('Anda Yakin?')" class="flex items-center justify-center bg-red-600 rounded-lg cursor-pointer p-1 w-fit">
+                                <a href="./delete.php?id_produk=<?= $pdk["id_produk"]; ?>" onclick="if(confirm('Anda Yakin?')) { alert('Produk berhasil dihapus'); return true; } else { return false; }" class="flex items-center justify-center bg-red-600 rounded-lg cursor-pointer p-1 w-fit">
                                     <img src="../assets/icon/trash.svg" alt="logo" class="w-6">
                                 </a>
                             </div>
@@ -124,10 +124,10 @@
                         <td class="p-2"><?= $ktg["nama_kategori"]; ?></td>
                         <td class="p-2">
                             <div class="flex gap-1">
-                                <a href="./edit.php?id_produk=<?= $ktg["id_kategori"]; ?>" class="flex items-center justify-center bg-yellow-300 rounded-lg cursor-pointer p-1 w-fit">
+                                <a href="./edit.php?id_kategori=<?= $ktg["id_kategori"]; ?>" class="flex items-center justify-center bg-yellow-300 rounded-lg cursor-pointer p-1 w-fit">
                                     <img src="../assets/icon/edit.svg" alt="logo" class="w-6">
                                 </a>
-                                <a href="./delete.php?id_produk=<?= $ktg["id_kategori"]; ?>" onclick="return confirm('Anda Yakin?')" class="flex items-center justify-center bg-red-600 rounded-lg cursor-pointer p-1 w-fit">
+                                <a href="./delete.php?id_kategori=<?= $ktg["id_kategori"]; ?>" onclick="if(confirm('Anda Yakin?')) { alert('Kategori berhasil dihapus'); return true; } else { return false; }" class="flex items-center justify-center bg-red-600 rounded-lg cursor-pointer p-1 w-fit">
                                     <img src="../assets/icon/trash.svg" alt="logo" class="w-6">
                                 </a>
                             </div>

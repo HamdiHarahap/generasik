@@ -27,7 +27,7 @@
 </head>
 <body class="bg-[#F2F9FE] h-[50rem]">
     <header class="bg-blue-900 w-48 h-screen fixed text-white flex flex-col justify-between py-16 top-0 font-semibold">
-    <nav>
+        <nav>
             <ul class="flex flex-col gap-4">
                 <li>
                     <a href="./dashboard.php" class="flex gap-2 px-10 py-3">
@@ -35,7 +35,7 @@
                         Dashboard
                     </a>
                 </li>
-                <li class="bg-[#F2F9FE] px-10 py-3 text-black">
+                <li class="bg-[#F2F9FE] px-10 py-3 text-black rounded-s-lg">
                     <a href="" class="flex gap-2">
                         <img src="../assets/icon/manage-dark.svg" alt="logo" class="w-6">
                         Kelola

@@ -49,7 +49,7 @@
                         Pelanggan
                     </a>
                 </li>
-                <li class="bg-[#F2F9FE] px-10 py-3 text-black">
+                <li class="bg-[#F2F9FE] px-10 py-3 text-black rounded-s-lg">
                     <a href="" class="flex gap-2">
                         <img src="../assets/icon/report-dark.svg" alt="logo" class="w-6">
                         Laporan
