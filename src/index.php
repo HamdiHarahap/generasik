@@ -43,6 +43,20 @@
         right: 20rem; 
     }
 
+    @media screen and (max-width: 520px) {
+        html, body {
+            overflow-x: hidden;
+        }
+
+        .splide__arrow--next {
+            right: 18rem; 
+        }
+
+        .splide__arrow--prev {
+            left: 18rem;    
+        }
+    }
+
     .navbar-scrolled {
         background-color: #FFFFFF;
         border-bottom: 1px solid #EEEEEE;
@@ -51,9 +65,15 @@
 </style>
 <body class="bg-white">
     <header>
-        <nav class="nav font-semibold flex justify-between px-52 items-center fixed w-full py-4 z-10 white-text">
-            <h1 class="text-4xl font-raleway">Generasik</h1>
-            <ul class="flex gap-4">
+        <nav class="nav font-semibold flex justify-between px-52 items-center fixed w-[124%] py-4 z-10 white-text max-[520px]:px-6 max-[520px]:flex-col max-[520px]:items-start max-[520px]:justify-center max-[520px]:bg-white max-[520px]:text-black max-[520px]:w-[100vw]">
+            <div class="flex max-[520px]:justify-between max-[520px]:w-full">
+                <h1 class="text-4xl font-raleway">Generasik</h1>
+                <div>
+                    <img src="./assets/icon/menu.svg" alt="" class="menu w-10 min-[520px]:hidden">
+                    <img src="./assets/icon/close.svg" alt="" class="close w-10 min-[520px]:hidden hidden">
+                </div>
+            </div>
+            <ul class="list-menu min-[520px]:flex gap-4 max-[520px]:flex-col hidden max-[520px]:mt-5">
                 <li><a href="" class="text-red-600">Beranda</a></li>
                 <li><a href="./pages/tentang-kami.php" class="hover:text-red-600">Tentang Kami</a></li>
                 <li><a href="./pages/produk/coffee.php" class="hover:text-red-600">Produk</a></li>
@@ -65,20 +85,20 @@
                     <?php endif;?>
                 </li>
                 <li>
-                    <a href="./pages/produk.php" class="bg-black hover:bg-red-600 text-white px-4 py-2 rounded-lg ml-4 font-lato">Pesan Sekarang</a>
+                    <a href="./pages/produk.php" class="bg-black hover:bg-red-600 text-white px-4 py-2 rounded-lg ml-4 font-lato max-[520px]:m-0">Pesan Sekarang<a>
                 </li>
             </ul>
         </nav>
     </header>
     <main>
-        <section class="flex items-center bg-neutral-700 h-[100vh] relative px-52 py-32 text-white">
+        <section class="flex items-center bg-neutral-700 h-[100vh] relative px-52 py-32 text-white max-[520px]:px-6">
             <article class="flex flex-col gap-6">
                 <h1 class="text-6xl font-bold font-raleway leading-[4.5rem] text-red-600">Temukan Seni Kopi <br> Yang Sempurna</h1>
                 <p class="text-xl font-normal font-lato">rasakan cita rasa yang kaya dan berani dari kopi <br> nikmat kami. dibuat untuk <br> membangkitkan indra Anda dan memulai hari Anda</p>
             </article>
-            <img src="./assets/images/home-removebg-preview1.png" alt="" class="w-[27rem] absolute bottom-0 right-52">
+            <img src="./assets/images/home-removebg-preview1.png" alt="" class="w-[27rem] absolute bottom-0 right-52 max-[520px]:hidden">
         </section>
-        <section class="flex flex-col px-52 py-32 items-center text-center gap-12">
+        <section class="flex flex-col px-52 py-32 items-center text-center gap-12 max-[520px]:px-6">
             <article class="flex flex-col gap-4">        
                 <div class="flex flex-col gap-2">
                     <h1 class="text-4xl font-semibold text bg-center font-raleway">Recommended Coffe</h1>
@@ -86,9 +106,9 @@
                 </div>
                 <p class="text-lg font-semibold text-neutral-400 font-lato">Cicipi kopi pilihan terbaik yang kami rekomendasikan, penuh <br> rasa dan aroma istimewa.</p>
             </article>
-            <article class="flex justify-around w-full">
+            <article class="flex justify-around w-full max-[520px]:flex-col max-[520px]:gap-10 flex-wrap">
                 <div class="flex flex-col items-center text-center">
-                    <img src="./assets/images/kopsu.jpg" alt="" class="w-64 rounded-lg">
+                    <img src="./assets/images/kopsu.png" alt="" class="w-64 rounded-lg">
                     <h2 class="text-xl font-bold mt-6 font-raleway">Kopi Susu Gula Aren</h2>
                     <p class="w-64 font-lato">Rasakan kenikmatan perpaduan kopi robusta yang kuat dengan manisnya gula aren yang khas, menciptakan harmoni rasa yang sempurna.</p>
                 </div>
@@ -109,14 +129,14 @@
                 </div>
             </article>
          </section>
-         <section class="flex flex-col px-52 py-32 items-center text-center gap-16 bg-fixed bg-[url(./assets/images/bg-menu.jpg)] bg-no-repeat bg-center bg-cover">
+         <section class="flex flex-col px-52 py-32 items-center text-center gap-16 bg-fixed bg-[url(./assets/images/bg-menu.jpg)] bg-no-repeat bg-center bg-cover max-[520px]:px-6">
             <article class="flex flex-col gap-4">        
                 <div class="flex flex-col gap-2">
                     <h1 class="text-4xl font-semibold text bg-center text-white font-raleway">Menu Kami</h1>
                     <div class="w-32 bg-red-600 h-1 m-auto"></div>
                 </div>
             </article>
-            <article class="flex justify-center gap-6">
+            <article class="flex justify-center gap-6 max-[520px]:flex-col">
                 <div class="flex flex-col justify-center items-center bg-white rounded-lg gap-6 px-6 py-10 w-[22rem]">
                     <img src="./assets/images/coffee.jpg" alt="" class="w-44 rounded-full border-4 border-white shadow-lg">
                     <h2 class="text-4xl font-bold mb-4 font-raleway">COFFEE</h2>
@@ -155,7 +175,7 @@
                 </div>
             </article>
          </section>
-         <section class="flex flex-col px-52 py-32 items-center text-center gap-16">
+         <section class="flex flex-col px-52 py-32 items-center text-center gap-16 max-[520px]:px-6">
             <article class="flex flex-col gap-4">        
                 <div class="flex flex-col gap-2">
                     <h1 class="text-4xl font-semibold text bg-center font-raleway">What Customers Say</h1>
@@ -168,8 +188,8 @@
                         <ul class="splide__list">
                             <li class="splide__slide">
                                 <div class="flex flex-col justify-center items-center relative pt-12">
-                                    <img src="./assets/images/attar.jpg" alt="images" class="w-24 rounded-full border-4 border-white absolute top-0">
-                                    <div class="w-[30rem] bg-black text-white pt-14 pb-8 px-12 flex flex-col items-center rounded-lg">
+                                    <img src="./assets/images/attar.jpg" alt="images" class="w-24 rounded-full border-4 border-white absolute top-0 ">
+                                    <div class="w-[30rem] max-[520px]:w-[20rem] bg-black text-white pt-14 pb-8 px-12 flex flex-col items-center rounded-lg">
                                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci quam minus cumque obcaecati ad natus repellendus distinctio accusantium, ex a delectus commodi nulla in, provident animi, asperiores tempora rem quibusdam?</p>
                                         <div class="flex gap-2 mt-4">
                                             <img src="./assets/icon/star.svg" alt="" class="w-5">
@@ -185,7 +205,7 @@
                             <li class="splide__slide">
                                 <div class="flex flex-col justify-center items-center relative pt-12">
                                     <img src="./assets/images/attar.jpg" alt="images" class="w-24 rounded-full border-4 border-white absolute top-0">
-                                    <div class="w-[30rem] bg-black text-white pt-14 pb-8 px-12 flex flex-col items-center rounded-lg">
+                                    <div class="w-[30rem] max-[520px]:w-[20rem] bg-black text-white pt-14 pb-8 px-12 flex flex-col items-center rounded-lg">
                                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci quam minus cumque obcaecati ad natus repellendus distinctio accusantium, ex a delectus commodi nulla in, provident animi, asperiores tempora rem quibusdam?</p>
                                         <div class="flex gap-2 mt-4">
                                             <img src="./assets/icon/star.svg" alt="" class="w-5">
@@ -201,7 +221,7 @@
                             <li class="splide__slide">
                                 <div class="flex flex-col justify-center items-center relative pt-12">
                                     <img src="./assets/images/attar.jpg" alt="images" class="w-24 rounded-full border-4 border-white absolute top-0">
-                                    <div class="w-[30rem] bg-black text-white pt-14 pb-8 px-12 flex flex-col items-center rounded-lg">
+                                    <div class="w-[30rem] max-[520px]:w-[20rem] bg-black text-white pt-14 pb-8 px-12 flex flex-col items-center rounded-lg">
                                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci quam minus cumque obcaecati ad natus repellendus distinctio accusantium, ex a delectus commodi nulla in, provident animi, asperiores tempora rem quibusdam?</p>
                                         <div class="flex gap-2 mt-4">
                                             <img src="./assets/icon/star.svg" alt="" class="w-5">
@@ -220,8 +240,8 @@
             </article>
          </section>
     </main>
-    <footer class="px-52 pt-20 pb-9 bg-neutral-700 text-white flex flex-col items-center gap-20">
-        <div class="flex justify-between container">
+    <footer class="px-52 pt-20 pb-9 bg-neutral-700 text-white flex flex-col items-center gap-20 max-[520px]:px-6">
+        <div class="flex justify-between container max-[520px]:flex-col gap-8">
             <h3 class="text-3xl font-semibold font-raleway">Generasik</h3>
             <div class="flex flex-col gap-3">
                 <h3 class="text-2xl font-semibold font-raleway">Links</h3>
@@ -276,5 +296,25 @@
     </footer>
 
     <script src="./js/main.js"></script>
+    <script>
+        const menu = document.querySelector('.menu')
+        const close = document.querySelector('.close')
+        const list = document.querySelector('.list-menu')
+
+        menu.addEventListener('click', function() {
+            list.classList.remove('hidden')
+            list.classList.add('flex')
+            menu.classList.add('hidden')
+            close.classList.remove('hidden')
+        })
+
+        close.addEventListener('click', function() {
+            list.classList.remove('flex')
+            list.classList.add('hidden')
+            close.classList.add('hidden')
+            menu.classList.remove('hidden')
+        })
+
+    </script>
 </body>
 </html>
