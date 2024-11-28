@@ -5,7 +5,7 @@
     $produk = query("SELECT * FROM produk");
 
     if(isset($_POST["cari"])) {
-        $produk = search($_POST["keyword"]);
+        $produk = search_produk($_POST["keyword"]);
     }
 
     if (isset($_POST["filter"])) {

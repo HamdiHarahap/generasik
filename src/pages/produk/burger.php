@@ -2,13 +2,12 @@
     session_start();
     
     require '../../functions/functions.php';
-
+    
     $jumlah_produk = '';
 
     if(isset($_SESSION["id_produk"])) {
         $jumlah_produk = count($_SESSION["id_produk"]);
     }
-
 
     $produk = query("SELECT * FROM produk WHERE id_kategori = 3");
 ?>
@@ -38,45 +37,61 @@
         .grey {
             color: #B7B7B7;
         }
+
+        @media screen and (max-width: 520px) {
+            .splide__arrow--next {
+                right: 25.3rem;
+            }
+
+            .splide__arrow--prev {
+                left: 0; 
+            }
+        } 
     </style>
 </head>
 <body>
     <header>
-        <nav class="bg-white border-b-2 font-semibold flex justify-between px-52 items-center fixed w-full py-4 z-10">
-            <h1 class="text-4xl font-raleway">Generasik</h1>
-            <ul class="flex gap-4">
-                <li><a href="../../index.php" class="hover:text-red-600">Beranda</a></li>
+        <nav class="nav font-semibold flex justify-between px-52 items-center bg-white border-b fixed w-[124%] py-4 z-10 white-text max-[520px]:px-6 max-[520px]:flex-col max-[520px]:items-start max-[520px]:justify-center max-[520px]:bg-white max-[520px]:text-black max-[520px]:w-[100vw] max-[520px]:border-b">
+            <div class="flex max-[520px]:justify-between max-[520px]:w-full">
+                <h1 class="text-4xl font-raleway">Generasik</h1>
+                <div>
+                    <img src="../../assets/icon/menu.svg" alt="" class="menu w-10 min-[520px]:hidden">
+                    <img src="../../assets/icon/close.svg" alt="" class="close w-10 min-[520px]:hidden hidden">
+                </div>
+            </div>
+            <ul class="list-menu min-[520px]:flex gap-4 max-[520px]:flex-col hidden max-[520px]:mt-5">
+                <li><a href="../index.php" class="hover:text-red-600">Beranda</a></li>
                 <li><a href="../tentang-kami.php" class="hover:text-red-600">Tentang Kami</a></li>
-                <li><a href="" class="text-red-600">Produk</a></li>
+                <li><a href="./produk/coffee.php" class="text-red-600">Produk</a></li>
                 <li><a href="../lokasi.php" class="hover:text-red-600">Toko Kami</a></li>
                 <li>
-                    <a href="../keranjang.php">Keranjang</a>
+                    <a href="./pages/keranjang.php">Keranjang</a>
                     <?php if(isset($_SESSION["id_produk"])): ?>
                         <sup class="text-red-600"><?= $jumlah_produk; ?></sup>
                     <?php endif;?>
                 </li>
                 <li>
-                    <a href="../produk.php" class="bg-black hover:bg-red-600 text-white px-4 py-2 rounded-lg ml-4 font-lato">Pesan Sekarang</a>
+                    <a href="./pages/produk.php" class="bg-black hover:bg-red-600 text-white px-4 py-2 rounded-lg ml-4 font-lato max-[520px]:m-0">Pesan Sekarang<a>
                 </li>
             </ul>
         </nav>
     </header>
     <main>
-        <section class="bg-neutral-200 px-52 py-32 flex flex-col gap-12">
+        <section class="bg-neutral-200 px-52 py-32 flex flex-col gap-12 max-[520px]:px-6">
             <h1 class="text-3xl font-semibold">Produk Kami</h1>
-            <article class="bg-white text-black flex w-full px-8 py-20">
-                <div class="flex flex-col text-xl font-semibold gap-4">
-                    <a href="./coffee.php" class="grey w-[16rem] text-start ps-10 flex gap-2">
+            <article class="bg-white text-black flex w-full px-8 py-20 max-[520px]:flex-col max-[520px]:px-2 max-[520px]:py-6 max-[520px]:gap-6">
+                <div  class="flex flex-col text-xl font-semibold gap-4">
+                    <a href="./coffee.php" class="coffee w-[16rem] grey text-start ps-10 flex gap-2">
                         <img src="../../assets/icon/coffee.svg" alt="" class="w-9 hidden">
                         <img src="../../assets/icon/coffee-grey.svg" alt="" class="w-9">
                         Coffee Series
                     </a>
-                    <a href="./non-coffee.php" class="grey w-[16rem] text-start ps-10 flex gap-2">
+                    <a href="./non-coffee.php" class="tea grey w-[16rem] text-start ps-10 flex gap-2">
                         <img src="../../assets/icon/tea.svg" alt="" class="w-9 hidden">
                         <img src="../../assets/icon/tea-grey.svg" alt="" class="w-9">
                         Non-Coffee Series
                     </a>
-                    <a href="" class="w-[16rem] text-start ps-10 flex gap-2">
+                    <a href="" class="burger w-[16rem] text-start ps-10 flex gap-2">
                         <img src="../../assets/icon/burger.svg" alt="" class="w-9">
                         <img src="../../assets/icon/burger-grey.svg" alt="" class="w-9 hidden">
                         Burger
@@ -88,10 +103,11 @@
                             <ul class="splide__list">
                                 <?php foreach($produk as $pdk): ?>
                                     <li class="splide__slide">
-                                        <div class="rounded-lg ms-28 px-4 py-6 flex items-center gap-3 w-[20rem]">
+                                        <div class="rounded-lg ms-28 px-4 py-6 flex items-center gap-3 w-[20rem] max-[520px]:flex-col max-[520px]:m-0">
+                                            <h1 class="text-4xl font-semibold min-[520px]:hidden">Burger Series</h1>
                                             <img src="../../assets/images/<?= $pdk["gambar"]; ?>" alt="image" class="w-56 rounded-lg">
                                             <div class="flex flex-col gap-2">
-                                                <h1 class="text-4xl font-semibold">Burger Series</h1>
+                                                <h1 class="text-4xl font-semibold max-[520px]:hidden">Burger Series</h1>
                                                 <h4 class="text-xl font-semibold"><?= $pdk["nama_produk"]; ?></h4>
                                                 <p class="w-[16rem]"><?= $pdk["keterangan_produk"]; ?></p>
                                             </div>
@@ -105,15 +121,15 @@
             </article>
         </section>
     </main>
-    <footer class="px-52 pt-20 pb-9 bg-neutral-700 text-white flex flex-col items-center gap-20">
-        <div class="flex justify-between container">
+    <footer class="px-52 pt-20 pb-9 bg-neutral-700 text-white flex flex-col items-center gap-20 max-[520px]:px-6">
+        <div class="flex justify-between container max-[520px]:flex-col gap-8">
             <h3 class="text-3xl font-semibold font-raleway">Generasik</h3>
             <div class="flex flex-col gap-3">
                 <h3 class="text-2xl font-semibold font-raleway">Links</h3>
                 <ul class="flex flex-col gap-2">
                     <li class="flex gap-2">
                         <img src="../../assets/icon/arrow.svg" alt="icon" class="w-5">
-                        <a href="./index.php" class="hover:text-blue-800 font-lato">Beranda</a>
+                        <a href="../index.php" class="hover:text-blue-800 font-lato">Beranda</a>
                     </li>
                     <li class="flex gap-2">
                         <img src="../../assets/icon/arrow.svg" alt="icon" class="w-5">
@@ -121,11 +137,11 @@
                     </li>
                     <li class="flex gap-2">
                         <img src="../../assets/icon/arrow.svg" alt="icon" class="w-5">
-                        <a href="./store.php" class="hover:text-blue-800 font-lato">Produk</a>
+                        <a href="./produk/coffee.php" class="hover:text-blue-800 font-lato">Produk</a>
                     </li>
                     <li class="flex gap-2">
                         <img src="../../assets/icon/arrow.svg" alt="icon" class="w-5">
-                        <a href="./cart.php" class="hover:text-blue-800 font-lato">Toko Kami</a>
+                        <a href="./keranjang.php" class="hover:text-blue-800 font-lato">Toko Kami</a>
                     </li>
                 </ul>
             </div>
@@ -161,5 +177,25 @@
     </footer>
 
     <script src="../../js/main.js"></script>
+    <script>
+        const menu = document.querySelector('.menu')
+        const close = document.querySelector('.close')
+        const list = document.querySelector('.list-menu')
+
+        menu.addEventListener('click', function() {
+            list.classList.remove('hidden')
+            list.classList.add('flex')
+            menu.classList.add('hidden')
+            close.classList.remove('hidden')
+        })
+
+        close.addEventListener('click', function() {
+            list.classList.remove('flex')
+            list.classList.add('hidden')
+            close.classList.add('hidden')
+            menu.classList.remove('hidden')
+        })
+
+    </script>
 </body>
 </html>

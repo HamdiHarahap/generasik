@@ -15,11 +15,21 @@
         return $rows;
     }
 
-    function search($keyword) {
+    function search_produk($keyword) {
         global $conn;
         $keyword = mysqli_real_escape_string($conn, $keyword);
         $query = "SELECT * FROM produk WHERE nama_produk LIKE '%$keyword%'";
         return query($query);
+    }
+
+    function search_pesanan_bulan($keyword) {
+        global $conn;
+
+        $keyword = mysqli_real_escape_string($conn, $keyword);
+        $query = "SELECT p.nama_pelanggan, pr.nama_produk, t.jumlah_produk, pr.harga_produk, t.tanggal FROM transaksi AS t JOIN produk AS pr ON t.id_produk=pr.id_produk JOIN pelanggan AS p ON t.id_pelanggan=p.id_pelanggan WHERE t.tanggal LIKE '%$keyword%' ";
+
+        return query($query);
+
     }
 
     function filter($kategori) {

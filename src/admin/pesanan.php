@@ -9,6 +9,10 @@
     
     $pelanggan = query("SELECT * FROM pelanggan");
     $pesanan = query("SELECT p.nama_pelanggan, pr.nama_produk, t.jumlah_produk, pr.harga_produk, t.tanggal FROM transaksi AS t JOIN produk AS pr ON t.id_produk=pr.id_produk JOIN pelanggan AS p ON t.id_pelanggan=p.id_pelanggan ORDER BY t.tanggal DESC");
+
+    if(isset($_POST["submit"])) {
+        $pesanan = search_pesanan_bulan($_POST["keyword"]);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -85,7 +89,13 @@
             </table>
         </section>
         <section class="mr-4 bg-[#FFFFFF] rounded-lg p-5">
-            <h1 class="text-sm font-semibold">Daftar Pesanan</h1>
+            <div class="flex justify-between">
+                <h1 class="text-sm font-semibold">Daftar Pesanan</h1>
+                <form method="POST" class="flex gap-6">
+                    <input name="keyword" type="month" class="border-none outline-none">
+                    <button type="submit" name="submit" class="text-blue-600 font-semibold">Cari</button>
+                </form>
+            </div>
             <table class="border mr-4 w-full mt-4">
                 <tr class="border text-left bg-blue-900 text-white">
                     <th class="p-2">No</th>
