@@ -123,5 +123,7 @@
         </div>
         <p class="font-lato">Copyright &copy; Generasik. All Right Reserved</p>
     </footer>
+
+    <script src="../js/navgiation.js"></script>
 </body>
 </html>

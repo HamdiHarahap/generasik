@@ -32,10 +32,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <header>
-        <nav class="bg-white border-b-2 font-semibold flex justify-between px-52 items-center fixed w-full py-4 z-10">
-            <h1 class="text-4xl font-raleway">Generasik</h1>
-            <ul class="flex gap-4">
+<header>
+        <nav class="nav font-semibold flex justify-between px-52 items-center fixed bg-white border-b w-[124%] py-4 z-10 white-text max-[520px]:px-6 max-[520px]:flex-col max-[520px]:items-start max-[520px]:justify-center max-[520px]:bg-white max-[520px]:text-black max-[520px]:w-[100vw] max-[520px]:border-b">
+            <div class="flex max-[520px]:justify-between max-[520px]:w-full">
+                <h1 class="text-4xl font-raleway">Generasik</h1>
+                <div>
+                    <img src="../assets/icon/menu.svg" alt="" class="menu w-10 min-[520px]:hidden">
+                    <img src="../assets/icon/close.svg" alt="" class="close w-10 min-[520px]:hidden hidden">
+                </div>
+            </div>
+            <ul class="list-menu min-[520px]:flex gap-4 max-[520px]:flex-col hidden max-[520px]:mt-5">
                 <li><a href="../index.php" class="hover:text-red-600">Beranda</a></li>
                 <li><a href="./tentang-kami.php" class="hover:text-red-600">Tentang Kami</a></li>
                 <li><a href="./produk/coffee.php" class="hover:text-red-600">Produk</a></li>
@@ -47,13 +53,13 @@
                     <?php endif;?>
                 </li>
                 <li>
-                    <a href="./produk.php" class="bg-black hover:bg-red-600 text-white px-4 py-2 rounded-lg ml-4 font-lato">Pesan Sekarang</a>
+                    <a href="./produk.php" class="bg-black hover:bg-red-600 text-white px-4 py-2 rounded-lg ml-4 font-lato max-[520px]:m-0">Pesan Sekarang<a>
                 </li>
             </ul>
         </nav>
     </header>
     <main class="bg-neutral-200">
-        <section class="flex flex-col px-52 py-32 gap-12">
+        <section class="flex flex-col px-52 py-32 gap-12 max-[520px]:px-6">
             <h1 class="text-3xl font-semibold">Keranjang</h1>
             <?php if(empty($produk)): ?>
                 <div class="flex shadow-lg shadow-slate-400 rounded-lg px-8 py-12 bg-white">
@@ -102,7 +108,7 @@
         <div class="bg-blue-100 px-12 py-8">
             <div class="">
                 <h2 class="text-center mb-8 font-semibold text-3xl">Transaksi</h2>
-                <p class="text-xl font-semibold cursor-pointer absolute top-[2rem] right-[2rem] close">X</p>
+                <p class="text-xl font-semibold cursor-pointer absolute top-[2rem] right-[2rem] back">X</p>
                 <div id="transaksiContent"></div>
                 <div class="flex justify-between">
                     <p class="text-xl font-semibold">Total Harga</p>
@@ -132,15 +138,15 @@
             <button class="bg-blue-800 text-white w-full rounded-lg py-3 text-xl font-semibold text-center mt-7 cursor-pointer">Pesan</button>
         </form>
     </div>
-    <footer class="px-52 pt-20 pb-9 bg-neutral-700 text-white flex flex-col items-center gap-20">
-        <div class="flex justify-between container">
+    <footer class="px-52 pt-20 pb-9 bg-neutral-700 text-white flex flex-col items-center gap-20 max-[520px]:px-6">
+        <div class="flex justify-between container max-[520px]:flex-col gap-8">
             <h3 class="text-3xl font-semibold font-raleway">Generasik</h3>
             <div class="flex flex-col gap-3">
                 <h3 class="text-2xl font-semibold font-raleway">Links</h3>
                 <ul class="flex flex-col gap-2">
                     <li class="flex gap-2">
                         <img src="../assets/icon/arrow.svg" alt="icon" class="w-5">
-                        <a href="./index.php" class="hover:text-blue-800 font-lato">Beranda</a>
+                        <a href="../index.php" class="hover:text-blue-800 font-lato">Beranda</a>
                     </li>
                     <li class="flex gap-2">
                         <img src="../assets/icon/arrow.svg" alt="icon" class="w-5">
@@ -148,11 +154,11 @@
                     </li>
                     <li class="flex gap-2">
                         <img src="../assets/icon/arrow.svg" alt="icon" class="w-5">
-                        <a href="./store.php" class="hover:text-blue-800 font-lato">Produk</a>
+                        <a href="./produk/coffee.php" class="hover:text-blue-800 font-lato">Produk</a>
                     </li>
                     <li class="flex gap-2">
                         <img src="../assets/icon/arrow.svg" alt="icon" class="w-5">
-                        <a href="./cart.php" class="hover:text-blue-800 font-lato">Toko Kami</a>
+                        <a href="./keranjang.php" class="hover:text-blue-800 font-lato">Toko Kami</a>
                     </li>
                 </ul>
             </div>
@@ -208,7 +214,7 @@
         }
 
         const pOne = document.querySelector('.pOne');
-        const close = document.querySelector('.close');
+        const back = document.querySelector('.back');
         const modal = document.querySelector('#modal');
         const transaksiContent = document.getElementById('transaksiContent');
         const totalTransaksi = document.getElementById('totalTransaksi');
@@ -250,12 +256,13 @@
             totalTransaksi.innerText = `Rp. ${new Intl.NumberFormat('id-ID').format(total)}`;
         });
 
-        close.addEventListener('click', function() {
+        back.addEventListener('click', function() {
             modal.classList.add('hidden');
             main.classList.remove('blur');
             header.classList.remove('blur');
             footer.classList.remove('blur');
         });
     </script>
+    <script src="../js/navgiation.js"></script>
 </body>
 </html>
