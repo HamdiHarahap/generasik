@@ -9,9 +9,9 @@
 
     $bulanIni = date('Y-m');
     $pendapatanBulan = query("SELECT COALESCE(SUM(t.jumlah_produk * p.harga_produk), 0) AS total_pendapatan
-    FROM transaksi AS t
-    JOIN produk AS p ON t.id_produk = p.id_produk
-    WHERE DATE_FORMAT(t.tanggal, '%Y-%m') = '$bulanIni'");
+        FROM transaksi AS t
+        JOIN produk AS p ON t.id_produk = p.id_produk
+        WHERE DATE_FORMAT(t.tanggal, '%Y-%m') = '$bulanIni'");
     
     $penjualan = query("SELECT DATE_FORMAT(t.tanggal, '%Y-%m') AS bulan_tahun, COUNT(t.id_transaksi) AS jumlah_transaksi
         FROM transaksi AS t
@@ -26,6 +26,18 @@
             pelanggan AS pl ON t.id_pelanggan = pl.id_pelanggan 
         GROUP BY 
             p.id_produk");
+
+    $produkTerbanyak = query("SELECT p.nama_produk AS n, COALESCE(SUM(t.jumlah_produk), 0) AS total_jumlah_terjual 
+        FROM produk AS p 
+        LEFT JOIN transaksi AS t ON p.id_produk = t.id_produk 
+        GROUP BY p.id_produk 
+        ORDER BY total_jumlah_terjual DESC LIMIT 1")[0];
+
+    $jumlahTransaksi = query("SELECT p.nama_pelanggan, COUNT(DISTINCT DATE(t.tanggal), t.id_pelanggan) AS jumlah_transaksi
+        FROM transaksi AS t
+        INNER JOIN pelanggan AS p ON t.id_pelanggan = p.id_pelanggan
+        GROUP BY p.nama_pelanggan
+        ORDER BY jumlah_transaksi DESC")
 ?>
 
 <!DOCTYPE html>
@@ -95,7 +107,11 @@
                 </div>
                 <div class="bg-blue-100 p-4 rounded-lg">
                     <h2 class="font-semibold">Jumlah Transaksi</h2>
-                    <p class="text-lg font-bold"><?= number_format(count($penjualan)); ?></p>
+                    <p class="text-lg font-bold"><?= number_format(array_sum(array_column($jumlahTransaksi, 'jumlah_transaksi')), 0, ',', '.'); ?></p>
+                </div>
+                <div class="bg-blue-100 p-4 rounded-lg">
+                    <h2 class="font-semibold">Produk Laris</h2>
+                    <p class="text-lg font-bold"><?= $produkTerbanyak["n"]; ?> | <?= $produkTerbanyak["total_jumlah_terjual"]; ?></p>
                 </div>
             </div>
         </section>

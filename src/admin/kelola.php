@@ -6,7 +6,11 @@
     }   
     require '../functions/functions.php';
     
-    $product = query("SELECT p.id_produk, p.nama_produk, p.keterangan_produk, k.nama_kategori, p.harga_produk, p.gambar, p.is_available FROM produk AS p JOIN kategori AS k ON p.id_kategori=k.id_kategori ORDER BY p.id_kategori ASC");
+    $product = query("SELECT p.id_produk, p.nama_produk, p.keterangan_produk, k.nama_kategori, p.harga_produk, p.gambar, p.is_available 
+        FROM produk AS p 
+        JOIN kategori AS k ON p.id_kategori=k.id_kategori 
+        ORDER BY p.id_kategori ASC");
+        
     $kategori = query("SELECT * FROM kategori");
 ?>
 
