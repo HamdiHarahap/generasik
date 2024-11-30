@@ -13,9 +13,11 @@
         JOIN produk AS p ON t.id_produk = p.id_produk
         WHERE DATE_FORMAT(t.tanggal, '%Y-%m') = '$bulanIni'");
     
-    $penjualan = query("SELECT DATE_FORMAT(t.tanggal, '%Y-%m') AS bulan_tahun, COUNT(t.id_transaksi) AS jumlah_transaksi
+    $penjualan = query("SELECT DATE_FORMAT(t.tanggal, '%Y-%m') AS bulan_tahun, COUNT(DISTINCT DATE(t.tanggal), t.id_pelanggan) AS jumlah_transaksi
         FROM transaksi AS t
-        GROUP BY DATE_FORMAT(t.tanggal, '%Y-%m')");
+        INNER JOIN pelanggan AS p ON t.id_pelanggan = p.id_pelanggan
+        GROUP BY DATE_FORMAT(t.tanggal, '%Y-%m')
+        ORDER BY bulan_tahun");
 
     $produkPenjualan = query("SELECT p.nama_produk AS n, COALESCE(COUNT(t.jumlah_produk), 0) AS jp, p.harga_produk AS h, COALESCE(SUM(t.jumlah_produk * p.harga_produk), 0) AS th 
         FROM 
@@ -37,7 +39,7 @@
         FROM transaksi AS t
         INNER JOIN pelanggan AS p ON t.id_pelanggan = p.id_pelanggan
         GROUP BY p.nama_pelanggan
-        ORDER BY jumlah_transaksi DESC")
+        ORDER BY jumlah_transaksi DESC");
 ?>
 
 <!DOCTYPE html>
