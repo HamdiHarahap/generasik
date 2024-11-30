@@ -33,7 +33,7 @@
                 <li><a href="./produk/coffee.php" class="hover:text-red-600">Produk</a></li>
                 <li><a href="" class="text-red-600">Toko Kami</a></li>
                 <li>
-                    <a href="./pages/keranjang.php">Keranjang</a>
+                    <a href="./keranjang.php">Keranjang</a>
                     <?php if(isset($_SESSION["id_produk"])): ?>
                         <sup class="text-red-600"><?= $jumlah_produk; ?></sup>
                     <?php endif;?>
