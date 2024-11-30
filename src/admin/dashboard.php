@@ -6,6 +6,12 @@
     }
 
     require '../functions/functions.php';
+
+    $bulanIni = date('Y-m');
+    $pendapatanBulan = query("SELECT COALESCE(SUM(t.jumlah_produk * p.harga_produk), 0) AS total_pendapatan
+    FROM transaksi AS t
+    JOIN produk AS p ON t.id_produk = p.id_produk
+    WHERE DATE_FORMAT(t.tanggal, '%Y-%m') = '$bulanIni'");
     
     $penjualan = query("SELECT DATE_FORMAT(t.tanggal, '%Y-%m') AS bulan_tahun, COUNT(t.id_transaksi) AS jumlah_transaksi
         FROM transaksi AS t
@@ -75,6 +81,10 @@
         <section class="mr-4 bg-[#FFFFFF] rounded-lg p-5 flex flex-col gap-4">
             <h1 class="text-sm font-semibold mb-4">Ringkasan Penjualan</h1>
             <div class="grid grid-cols-3 gap-4">
+                <div class="bg-blue-100 p-4 rounded-lg">
+                    <h2 class="font-semibold">Pendapatan Bulan Ini</h2>
+                    <p class="text-lg font-bold"> <?= number_format($pendapatanBulan[0]['total_pendapatan'], 0, ',', '.'); ?></p>
+                </div>
                 <div class="bg-blue-100 p-4 rounded-lg">
                     <h2 class="font-semibold">Total Pendapatan</h2>
                     <p class="text-lg font-bold"><?= number_format(array_sum(array_column($produkPenjualan, 'th')), 0, ',', '.'); ?></p>

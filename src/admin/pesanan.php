@@ -8,7 +8,7 @@
     require '../functions/functions.php';
     
     $pelanggan = query("SELECT * FROM pelanggan");
-    $pesanan = query("SELECT p.nama_pelanggan, pr.nama_produk, t.jumlah_produk, pr.harga_produk, t.tanggal FROM transaksi AS t JOIN produk AS pr ON t.id_produk=pr.id_produk JOIN pelanggan AS p ON t.id_pelanggan=p.id_pelanggan ORDER BY t.tanggal DESC");
+    $pesanan = query("SELECT p.nama_pelanggan, pr.nama_produk, t.jumlah_produk AS jp, pr.harga_produk AS hp, t.tanggal FROM transaksi AS t JOIN produk AS pr ON t.id_produk=pr.id_produk JOIN pelanggan AS p ON t.id_pelanggan=p.id_pelanggan ORDER BY t.tanggal DESC");
 
     if(isset($_POST["submit"])) {
         $pesanan = search_pesanan_bulan($_POST["keyword"]);
@@ -64,7 +64,7 @@
         <aside class="bg-[#FFFFFF] flex justify-between p-5 items-center rounded-lg mr-4 mt-4">
             <div class="font-semibold">
                 <h2 class="text-sm">Menu</h2>
-                <h1 class="text-2xl">Pesanan</h1>
+                <h1 class="text-2xl">Pelanggan</h1>
             </div>
         </aside>
         <section class="mr-4 bg-[#FFFFFF] rounded-lg p-5">
@@ -111,12 +111,17 @@
                         <td class="p-2"><?= $no; ?></td>
                         <td class="p-2"><?= $psn["nama_pelanggan"]; ?></td>
                         <td class="p-2"><?= $psn["nama_produk"]; ?></td>
-                        <td class="p-2"><?= $psn["jumlah_produk"]; ?></td>
-                        <td class="p-2"><?= number_format($psn["harga_produk"], 0, ',', '.'); ?></td>
+                        <td class="p-2"><?= $psn["jp"]; ?></td>
+                        <td class="p-2"><?= number_format($psn["hp"], 0, ',', '.'); ?></td>
                         <td class="p-2"><?= $psn["tanggal"]; ?></td>
                     </tr>
                 <?php $no++ ?>
                 <?php endforeach; ?>
+                <tr class="font-semibold">
+                    <td colspan="3"></td>
+                    <td>Total: <?= number_format(array_sum(array_column($pesanan, 'jp')), 0, ',', '.'); ?></td>
+                    <td>Total: <?= number_format(array_sum(array_column($pesanan, 'hp')), 0, ',', '.'); ?></td>
+                </tr>
             </table>
         </section>
     </main>
