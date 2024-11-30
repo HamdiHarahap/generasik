@@ -119,7 +119,7 @@
         </section>
         <section class="mr-4 bg-[#FFFFFF] rounded-lg p-5 flex gap-[15rem]">
             <div class="w-[20rem]">
-                <h1 class="text-sm font-semibold mb-4">Penjualan Semua Produk per Bulan</h1>
+                <h1 class="text-sm font-semibold mb-4">Penjualan Produk per Bulan</h1>
                 <canvas id="barChart" width="400" height="400"></canvas>
             </div>
             <div>
