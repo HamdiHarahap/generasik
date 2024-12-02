@@ -9,40 +9,47 @@
     $alamat = mysqli_real_escape_string($conn, $_POST['alamat']);
     $produk = $_POST['produk']; 
 
-    $query = "INSERT INTO pelanggan VALUES ('', '$nama', '$alamat', '$nomor_hp')";
-    $result = mysqli_query($conn, $query);
+    $checkQuery = "SELECT id_pelanggan FROM pelanggan WHERE nama_pelanggan = '$nama' AND alamat = '$alamat' AND no_telp = '$nomor_hp'";
+    $checkResult = mysqli_query($conn, $checkQuery);
 
-    if ($result) {
-        $id_pelanggan = mysqli_insert_id($conn); 
-
-        foreach ($produk as $item) {
-            $id_produk = $item['id_produk']; // Pastikan ini ada di input hidden
-            $jumlah = $item['jumlah'];
-            $harga = $item['harga'];
-            $tanggal = date('Y-m-d');
-            // $total_harga = $jumlah * $harga;
-
-            $queryDetail = "INSERT INTO transaksi VALUES ('', '$id_pelanggan', '$id_produk', '$jumlah', '$tanggal')";
-            if (!mysqli_query($conn, $queryDetail)) {
-                echo "Error: " . mysqli_error($conn);
-            }
-        }
-
-        unset($_SESSION["id_produk"]);
-
-        echo "
-            <script>
-                alert('Pesanan berhasil di pesan, tunggu konfirmasi dari toko');
-                window.location.href = './keranjang.php';
-            </script>
-        ";
-        exit;
+    if (mysqli_num_rows($checkResult) > 0) {
+        $row = mysqli_fetch_assoc($checkResult);
+        $id_pelanggan = $row['id_pelanggan'];
     } else {
-        echo "
-            <script>
-                alert('Pesanan gagal di pesan: " . mysqli_error($conn) . "');
-                window.location.href = './keranjang.php';
-            </script>
-        ";
+        $query = "INSERT INTO pelanggan VALUES ('', '$nama', '$alamat', '$nomor_hp')";
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+            $id_pelanggan = mysqli_insert_id($conn); 
+        } else {
+            echo "
+                <script>
+                    alert('Pesanan gagal di pesan: " . mysqli_error($conn) . "');
+                    window.location.href = './keranjang.php';
+                </script>
+            ";
+            exit;
+        }
     }
+
+    foreach ($produk as $item) {
+        $id_produk = $item['id_produk']; 
+        $jumlah = $item['jumlah'];
+        $tanggal = date('Y-m-d');
+
+        $queryDetail = "INSERT INTO transaksi VALUES ('', '$id_pelanggan', '$id_produk', '$jumlah', '$tanggal')";
+        if (!mysqli_query($conn, $queryDetail)) {
+            echo "Error: " . mysqli_error($conn);
+        }
+    }
+
+    unset($_SESSION["id_produk"]);
+
+    echo "
+        <script>
+            alert('Pesanan berhasil di pesan, tunggu konfirmasi dari toko');
+            window.location.href = './keranjang.php';
+        </script>
+    ";
+    exit;
 ?>

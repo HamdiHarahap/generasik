@@ -12,7 +12,7 @@
         FROM transaksi AS t 
         JOIN produk AS pr ON t.id_produk=pr.id_produk 
         JOIN pelanggan AS p ON t.id_pelanggan=p.id_pelanggan 
-        ORDER BY t.tanggal DESC");
+        ORDER BY t.id_transaksi DESC");
 
     if(isset($_POST["submit"])) {
         $pesanan = search_pesanan_bulan($_POST["keyword"]);

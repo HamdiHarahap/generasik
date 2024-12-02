@@ -12,6 +12,13 @@
         FROM transaksi AS t
         JOIN produk AS p ON t.id_produk = p.id_produk
         WHERE DATE_FORMAT(t.tanggal, '%Y-%m') = '$bulanIni'");
+
+    $bulanLalu = date('Y-m', strtotime('first day of last month')); 
+    $pendapatanBulanLalu = query("SELECT COALESCE(SUM(t.jumlah_produk * p.harga_produk), 0) AS total_pendapatan
+        FROM transaksi AS t
+        JOIN produk AS p ON t.id_produk = p.id_produk
+        WHERE DATE_FORMAT(t.tanggal, '%Y-%m') = '$bulanLalu'");
+
     
     $penjualan = query("SELECT DATE_FORMAT(t.tanggal, '%Y-%m') AS bulan_tahun, COUNT(DISTINCT DATE(t.tanggal), t.id_pelanggan) AS jumlah_transaksi
         FROM transaksi AS t
@@ -98,6 +105,10 @@
                 <div class="bg-blue-100 p-4 rounded-lg">
                     <h2 class="font-semibold">Pendapatan Bulan Ini</h2>
                     <p class="text-lg font-bold"> <?= number_format($pendapatanBulan[0]['total_pendapatan'], 0, ',', '.'); ?></p>
+                </div>
+                <div class="bg-blue-100 p-4 rounded-lg">
+                    <h2 class="font-semibold">Pendapatan Bulan Lalu</h2>
+                    <p class="text-lg font-bold"> <?= number_format($pendapatanBulanLalu[0]['total_pendapatan'], 0, ',', '.'); ?></p>
                 </div>
                 <div class="bg-blue-100 p-4 rounded-lg">
                     <h2 class="font-semibold">Total Pendapatan</h2>
