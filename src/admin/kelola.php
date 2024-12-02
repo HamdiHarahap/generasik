@@ -27,6 +27,7 @@
 <body class="bg-[#F2F9FE] h-[50rem]">
     <header class="bg-blue-900 w-48 h-screen fixed text-white flex flex-col justify-between py-16 top-0 font-semibold">
         <nav>
+            <h2 class="text-center text-xl mb-6">Generasik</h2>
             <ul class="flex flex-col gap-4">
                 <li>
                     <a href="./dashboard.php" class="flex gap-2 px-10 py-3">
@@ -92,9 +93,9 @@
                         <td class="p-2"><?= $pdk["nama_kategori"]; ?></td>
                         <td class="p-2"><img src="../assets/images/<?= $pdk["gambar"]; ?>" alt="" class="w-[5rem] rounded-lg"></td>
                         <?php if($pdk["is_available"] == 'available'): ?>
-                            <td class="p-2"><p class="bg-green-600 text-white w-[7rem] px-3 py-2 rounded-lg text-center"><?= $pdk["is_available"] ?></p></td>
+                            <td class="p-2"><p class="bg-green-600 text-white w-[7rem] p-1 rounded-lg text-center"><?= $pdk["is_available"] ?></p></td>
                         <?php else: ?>
-                            <td class="p-2"><p class="bg-red-600 text-white w-[7rem] px-3 py-2 rounded-lg text-center"><?= $pdk["is_available"] ?></p></td>
+                            <td class="p-2"><p class="bg-red-600 text-white w-[7rem] p-1 rounded-lg text-center"><?= $pdk["is_available"] ?></p></td>
                         <?php endif; ?>
                         <td class="p-2">
                             <div class="flex gap-1">

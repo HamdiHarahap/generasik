@@ -28,6 +28,7 @@
 <body class="bg-[#F2F9FE] h-[50rem]">
     <header class="bg-blue-900 w-48 h-screen fixed text-white flex flex-col justify-between py-16 top-0 font-semibold">
         <nav>
+            <h2 class="text-center text-xl mb-6">Generasik</h2>
             <ul class="flex flex-col gap-4">
                 <li>
                     <a href="./dashboard.php" class="flex gap-2 px-10 py-3">
