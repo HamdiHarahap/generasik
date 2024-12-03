@@ -26,7 +26,11 @@
         global $conn;
 
         $keyword = mysqli_real_escape_string($conn, $keyword);
-        $query = "SELECT p.nama_pelanggan, pr.nama_produk, t.jumlah_produk AS jp, pr.harga_produk AS hp, t.tanggal FROM transaksi AS t JOIN produk AS pr ON t.id_produk=pr.id_produk JOIN pelanggan AS p ON t.id_pelanggan=p.id_pelanggan WHERE t.tanggal LIKE '%$keyword%' ";
+        $query = "SELECT p.nama_pelanggan, pr.nama_produk, t.jumlah_produk AS jp, pr.harga_produk AS hp, t.tanggal 
+            FROM transaksi AS t 
+            JOIN produk AS pr ON t.id_produk=pr.id_produk 
+            JOIN pelanggan AS p ON t.id_pelanggan=p.id_pelanggan 
+            WHERE t.tanggal LIKE '%$keyword%' ";
 
         return query($query);
 
@@ -115,6 +119,7 @@
         $keterangan = $data["keterangan"];
         $harga = $data["harga"];
         $kategori = $data["kategori"];
+        $status = $data["status"];
         $gambarLama = $data["gambarLama"];
 
         if ($_FILES['gambar']['error'] === 4) {
@@ -131,7 +136,8 @@
                     keterangan_produk = '$keterangan',
                     harga_produk = '$harga',
                     id_kategori = '$kategori',
-                    gambar = '$image'
+                    gambar = '$image',
+                    is_available = '$status'
                     WHERE id_produk = '$id'";
 
         mysqli_query($conn, $query);

@@ -64,7 +64,7 @@
             </div>
             <div class="flex gap-2 px-12 py-3">
                 <img src="../assets/icon/logout.svg" alt="logo" class="w-6">
-                <a href="../auth/logout.php">Logout</a>
+                <a href="../auth/logout.php"  onclick="if(confirm('Anda Yakin?')) { alert('Berhasil logout!'); return true; } else { return false; }">Logout</a>
             </div>
         </div>
     </header>

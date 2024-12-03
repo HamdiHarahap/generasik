@@ -34,6 +34,11 @@
             ";   
         }
     }
+
+    $status = [
+        "available" => "available",
+        "unavailable" => "unavailable"
+    ]
 ?>
 
 <!DOCTYPE html>
@@ -84,7 +89,7 @@
             </div>
             <div class="flex gap-2 px-12 py-3">
                 <img src="../assets/icon/logout.svg" alt="logo" class="w-6">
-                <a href="../auth/logout.php">Logout</a>
+                <a href="../auth/logout.php"  onclick="if(confirm('Anda Yakin?')) { alert('Berhasil logout!'); return true; } else { return false; }">Logout</a>
             </div>
         </div>
     </header>
@@ -123,10 +128,10 @@
                             </select>
                         </li>
                         <li class="flex flex-col">
-                            <label for="kategori" class="mb-1">Status :</label>
-                            <select name="kategori" id="kategori" class="border-b-2 border-black px-3 py-2 outline-none w-[30rem]" required>
-                                <?php foreach($kategori as $ktg): ?>
-                                    <option value="<?= $ktg["id_kategori"]; ?>" <?= $ktg["id_kategori"] == $produk["id_kategori"] ? 'selected' : ''; ?>><?= $ktg["nama_kategori"]; ?></option>
+                            <label for="status" class="mb-1">Status :</label>
+                            <select name="status" id="status" class="border-b-2 border-black px-3 py-2 outline-none w-[30rem]" required>
+                                <?php foreach($status as $sts): ?>
+                                    <option value="<?= $sts; ?>" <?= $sts == $produk["is_available"] ? 'selected' : ''; ?>><?= $sts; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </li>
