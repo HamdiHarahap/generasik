@@ -60,7 +60,7 @@
                 </div>
             </div>
             <ul class="list-menu min-[520px]:flex gap-4 max-[520px]:flex-col hidden max-[520px]:mt-5">
-                <li><a href="../index.php" class="hover:text-red-600">Beranda</a></li>
+                <li><a href="../../index.php" class="hover:text-red-600">Beranda</a></li>
                 <li><a href="../tentang-kami.php" class="hover:text-red-600">Tentang Kami</a></li>
                 <li><a href="./produk/coffee.php" class="text-red-600">Produk</a></li>
                 <li><a href="../lokasi.php" class="hover:text-red-600">Toko Kami</a></li>
@@ -71,7 +71,7 @@
                     <?php endif;?>
                 </li>
                 <li>
-                    <a href="./pages/produk.php" class="bg-black hover:bg-red-600 text-white px-4 py-2 rounded-lg ml-4 font-lato max-[520px]:m-0">Pesan Sekarang<a>
+                    <a href="../produk.php" class="bg-black hover:bg-red-600 text-white px-4 py-2 rounded-lg ml-4 font-lato max-[520px]:m-0">Pesan Sekarang<a>
                 </li>
             </ul>
         </nav>
@@ -94,7 +94,7 @@
                     <a href="" class="burger w-[16rem] text-start ps-10 flex gap-2">
                         <img src="../../assets/icon/burger.svg" alt="" class="w-9">
                         <img src="../../assets/icon/burger-grey.svg" alt="" class="w-9 hidden">
-                        Burger
+                        Food
                     </a>
                 </div>
                 <div class="w-[45rem]">

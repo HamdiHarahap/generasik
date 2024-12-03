@@ -123,6 +123,14 @@
                             </select>
                         </li>
                         <li class="flex flex-col">
+                            <label for="kategori" class="mb-1">Status :</label>
+                            <select name="kategori" id="kategori" class="border-b-2 border-black px-3 py-2 outline-none w-[30rem]" required>
+                                <?php foreach($kategori as $ktg): ?>
+                                    <option value="<?= $ktg["id_kategori"]; ?>" <?= $ktg["id_kategori"] == $produk["id_kategori"] ? 'selected' : ''; ?>><?= $ktg["nama_kategori"]; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </li>
+                        <li class="flex flex-col">
                             <label for="gambar" class="mb-1">Gambar :</label>
                             <div class="flex flex-col">
                                 <input type="file" name="gambar" id="gambar" class="mb-2" onchange="previewImage()">

@@ -93,9 +93,9 @@
                         <td class="p-2"><?= $pdk["nama_kategori"]; ?></td>
                         <td class="p-2"><img src="../assets/images/<?= $pdk["gambar"]; ?>" alt="" class="w-[5rem] rounded-lg"></td>
                         <?php if($pdk["is_available"] == 'available'): ?>
-                            <td class="p-2"><p class="bg-green-600 text-white w-[7rem] p-1 rounded-lg text-center"><?= $pdk["is_available"] ?></p></td>
+                            <td class="p-2"><p class="bg-green-600 text-white w-[7rem] p-1 rounded-lg text-center cursor-pointer"><?= $pdk["is_available"] ?></p></td>
                         <?php else: ?>
-                            <td class="p-2"><p class="bg-red-600 text-white w-[7rem] p-1 rounded-lg text-center"><?= $pdk["is_available"] ?></p></td>
+                            <td class="p-2"><p class="bg-red-600 text-white w-[7rem] p-1 rounded-lg text-center cursor-pointer"><?= $pdk["is_available"] ?></p></td>
                         <?php endif; ?>
                         <td class="p-2">
                             <div class="flex gap-1">
